@@ -20,11 +20,25 @@ void adicionarAluno() {
     getline(cin, aluno.nome);
     cout << "Digite a idade do aluno: ";
     cin >> aluno.idade;
+
+    // Verificação se a idade é válida
+    if(cin.fail() || aluno.idade < 0) {
+        cin.clear(); // Limpa o estado de erro
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer de entrada
+        cout << "Idade inválida. Aluno não adicionado.\n";
+        return;
+    }
+
     alunos.push_back(aluno);
     cout << "Aluno adicionado com sucesso!\n";
 }
 
 void listarAlunos() {
+    if (alunos.empty()) {
+        cout << "Nenhum aluno cadastrado.\n";
+        return;
+    }
+    
     for (const auto &aluno : alunos) {
         cout << "ID: " << aluno.id << " | Nome: " << aluno.nome << " | Idade: " << aluno.idade << endl;
     }
@@ -37,11 +51,20 @@ void editarAluno() {
     
     for (auto &aluno : alunos) {
         if (aluno.id == id) {
-            cout << "Digite o novo nome: ";
+            cout << "Digite o novo nome (atual: " << aluno.nome << "): ";
             cin.ignore();
             getline(cin, aluno.nome);
-            cout << "Digite a nova idade: ";
+            cout << "Digite a nova idade (atual: " << aluno.idade << "): ";
             cin >> aluno.idade;
+
+            // Verificação se a nova idade é válida
+            if(cin.fail() || aluno.idade < 0) {
+                cin.clear(); // Limpa o estado de erro
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer de entrada
+                cout << "Idade inválida. Alteração não realizada.\n";
+                return;
+            }
+
             cout << "Aluno atualizado!\n";
             return;
         }
