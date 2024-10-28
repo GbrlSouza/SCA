@@ -21,10 +21,9 @@ void adicionarAluno() {
     cout << "Digite a idade do aluno: ";
     cin >> aluno.idade;
 
-    // Verificação se a idade é válida
     if(cin.fail() || aluno.idade < 0) {
-        cin.clear(); // Limpa o estado de erro
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer de entrada
+        cin.clear(); 
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
         cout << "Idade inválida. Aluno não adicionado.\n";
         return;
     }
@@ -57,10 +56,9 @@ void editarAluno() {
             cout << "Digite a nova idade (atual: " << aluno.idade << "): ";
             cin >> aluno.idade;
 
-            // Verificação se a nova idade é válida
             if(cin.fail() || aluno.idade < 0) {
-                cin.clear(); // Limpa o estado de erro
-                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Limpa o buffer de entrada
+                cin.clear();
+                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cout << "Idade inválida. Alteração não realizada.\n";
                 return;
             }
